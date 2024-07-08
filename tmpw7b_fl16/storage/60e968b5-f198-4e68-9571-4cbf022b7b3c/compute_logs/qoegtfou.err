@@ -1,0 +1,24 @@
+[32m2024-07-08 11:12:19 +0300[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 60e968b5-f198-4e68-9571-4cbf022b7b3c - 43591 - LOGS_CAPTURED - Started capturing logs in process (pid: 43591).
+[32m2024-07-08 11:12:19 +0300[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 60e968b5-f198-4e68-9571-4cbf022b7b3c - 43591 - trips_by_week - STEP_START - Started execution of step "trips_by_week".
+[32m2024-07-08 11:12:19 +0300[0m - dagster - [34mERROR[0m - [31m__ASSET_JOB - 60e968b5-f198-4e68-9571-4cbf022b7b3c - 43591 - trips_by_week - STEP_FAILURE - Execution of step "trips_by_week" failed.
+
+dagster._core.errors.DagsterExecutionStepExecutionError: Error occurred while executing op "trips_by_week"::
+
+duckdb.duckdb.IOException: IO Error: Could not set lock on file "/Users/abdulrahman/Documents/Dagster/dagster_university/data/staging/data.duckdb": Conflicting lock is held in /Library/Frameworks/Python.framework/Versions/3.11/Resources/Python.app/Contents/MacOS/Python (PID 43590) by user abdulrahman. See also https://duckdb.org/docs/connect/concurrency
+
+Stack Trace:
+  File "/Users/abdulrahman/Documents/Dagster/venv/lib/python3.11/site-packages/dagster/_core/execution/plan/utils.py", line 54, in op_execution_error_boundary
+    yield
+  File "/Users/abdulrahman/Documents/Dagster/venv/lib/python3.11/site-packages/dagster/_utils/__init__.py", line 468, in iterate_with_context
+    next_output = next(iterator)
+                  ^^^^^^^^^^^^^^
+  File "/Users/abdulrahman/Documents/Dagster/venv/lib/python3.11/site-packages/dagster/_core/execution/plan/compute_generator.py", line 141, in _coerce_op_compute_fn_to_iterator
+    result = invoke_compute_fn(
+             ^^^^^^^^^^^^^^^^^^
+  File "/Users/abdulrahman/Documents/Dagster/venv/lib/python3.11/site-packages/dagster/_core/execution/plan/compute_generator.py", line 129, in invoke_compute_fn
+    return fn(context, **args_to_pass) if context_arg_provided else fn(**args_to_pass)
+                                                                    ^^^^^^^^^^^^^^^^^^
+  File "/Users/abdulrahman/Documents/Dagster/dagster_university/dagster_university/assets/metrics.py", line 70, in trips_by_week
+    conn = duckdb.connect(os.getenv("DUCKDB_DATABASE"))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[0m
