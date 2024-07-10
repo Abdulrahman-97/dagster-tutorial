@@ -1,4 +1,5 @@
-from dagster import asset
+from dagster import asset, AssetExecutionContext
+from ..partitions import weekly_partition
 
 import plotly.express as px
 import plotly.io as pio
@@ -59,12 +60,17 @@ def manhattan_map() -> None:
     pio.write_image(fig, constants.MANHATTAN_MAP_FILE_PATH)
 
 @asset(
-    deps=["taxi_trips"]
+    deps=["taxi_trips"],
+    partitions_def=weekly_partition
 )
-def trips_by_week(database: DuckDBResource) -> None:
-    query = """
+def trips_by_week(context: AssetExecutionContext, database: DuckDBResource) -> None:
+
+    period_to_fetch = context.partition_key
+
+    query = f"""
     select min(pickup_datetime) as period, count(1) as num_trips, sum(passenger_count) as passenger_count , sum(total_amount) as total_amount, sum(trip_distance) as trip_distance 
     from main.trips
+    where pickup_datetime between '{period_to_fetch}' and '{period_to_fetch}'::date + interval '1 week's
     group by week(pickup_datetime)
     """
 

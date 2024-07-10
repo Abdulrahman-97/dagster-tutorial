@@ -1,5 +1,0 @@
-[32m2024-07-04 15:35:16 +0300[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 10c5b98d-5fa9-4a5d-af80-ed630c2f6cb5 - 23155 - LOGS_CAPTURED - Started capturing logs in process (pid: 23155).
-[32m2024-07-04 15:35:16 +0300[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 10c5b98d-5fa9-4a5d-af80-ed630c2f6cb5 - 23155 - manhattan_stats - STEP_START - Started execution of step "manhattan_stats".
-[32m2024-07-04 15:35:16 +0300[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 10c5b98d-5fa9-4a5d-af80-ed630c2f6cb5 - 23155 - manhattan_stats - STEP_OUTPUT - Yielded output "result" of type "Nothing". (Type check passed).
-[32m2024-07-04 15:35:16 +0300[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 10c5b98d-5fa9-4a5d-af80-ed630c2f6cb5 - 23155 - manhattan_stats - ASSET_MATERIALIZATION - Materialized value manhattan_stats.
-[32m2024-07-04 15:35:16 +0300[0m - dagster - [34mDEBUG[0m - __ASSET_JOB - 10c5b98d-5fa9-4a5d-af80-ed630c2f6cb5 - 23155 - manhattan_stats - STEP_SUCCESS - Finished execution of step "manhattan_stats" in 341ms.
