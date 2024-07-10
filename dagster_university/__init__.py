@@ -1,23 +1,28 @@
 # fmt: off
 from dagster import Definitions, load_assets_from_modules
 
-from .assets import metrics, trips
+from .assets import metrics, trips, requests
 from .resources import database_resource
-from .jobs import trips_update_job, trips_by_week_job
+from .jobs import trips_update_job, trips_by_week_job, adhoc_request_job
 from .schedules import trip_update_schedule, weekly_update_schedule
+from .sensors import adhoc_request_sensor
 
 trip_assets = load_assets_from_modules([trips])
 metric_assets = load_assets_from_modules([metrics])
+request_assets = load_assets_from_modules([requests])
 
-all_jobs = [trips_update_job, trips_by_week_job]
+all_jobs = [trips_update_job, trips_by_week_job, adhoc_request_job]
 
 all_schedules = [trip_update_schedule, weekly_update_schedule]
 
+all_sensors = [adhoc_request_sensor]
+
 defs = Definitions(
-    assets=[*trip_assets, *metric_assets],
+    assets=[*trip_assets, *metric_assets, *request_assets],
     resources={
         "database": database_resource,
     },
     jobs=all_jobs,
-    schedules=all_schedules
+    schedules=all_schedules,
+    sensors=all_sensors
 )
